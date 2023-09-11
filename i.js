@@ -46,13 +46,10 @@ sumbit.addEventListener ('click', function (event) {
         timedate.value = '';
         sumbit.disabled = true;    
 
-
         // button edit delete done 
         const edit = ListItem.querySelector('.edit');
         const done = ListItem.querySelector('.done');
-
         
-
 
         ListItem.querySelector('.delete').addEventListener('click',function(){
             ListItem.remove();
@@ -69,13 +66,43 @@ sumbit.addEventListener ('click', function (event) {
 
         ListItem.querySelector('.edit').addEventListener('click',function(){
             const textEdit = prompt('Edit text\n');
-
             const p = ListItem.querySelector('p');
-
             p.innerHTML = textEdit;
-            
         })
 
+
+        //hover
+        ListItem.querySelector('.edit').addEventListener('mouseover',iconEditOn)      
+        function  iconEditOn () {
+            edit.innerHTML = '<i class="bi bi-pencil-fill text-dark"></i>'
+        }
+
+        ListItem.querySelector('.edit').addEventListener('mouseout',iconEditOff)   
+        function  iconEditOff () {
+            edit.innerHTML = 'Edit';
+        }
+        
+        ListItem.querySelector('.delete').addEventListener('mouseover',icondelOn)  
+        const del = ListItem.querySelector('.delete')
+        function  icondelOn () {
+            del.innerHTML = '<i class="bi bi-trash3-fill"></i>';
+        }
+
+        ListItem.querySelector('.delete').addEventListener('mouseout',icondelOff)      
+        function  icondelOff () {
+            del.innerHTML = 'delete';
+        }
+
+
+        ListItem.querySelector('.done').addEventListener('mouseover',icondoneOn)  
+        function  icondoneOn () {
+            done.innerHTML = '<i class="bi bi-check-square-fill"></i>';
+        }
+
+        ListItem.querySelector('.done').addEventListener('mouseout',icondoneOff)      
+        function  icondoneOff () {
+            done.innerHTML = 'done';
+        }
     })
 
 
