@@ -19,12 +19,11 @@ function validateInputs() {
     text.addEventListener('input', validateInputs);
     timedate.addEventListener('input', validateInputs);
 
-sumbit.addEventListener ('click', function (event) {
+    sumbit.addEventListener ('click', function (event) {
         event.preventDefault();
 
         const textValue = text.value;
         const timeValue = timedate.value;
-
         const ListItem = document.createElement('a');        
         
         ListItem.classList.add('list-group-item' ,'list-group-item-action', 'd-flex' ,'justify-content-between', 'align-items-center')
@@ -50,11 +49,12 @@ sumbit.addEventListener ('click', function (event) {
         const edit = ListItem.querySelector('.edit');
         const done = ListItem.querySelector('.done');
         
-
+        //delete item list
         ListItem.querySelector('.delete').addEventListener('click',function(){
             ListItem.remove();
         })
 
+        //done text
         ListItem.querySelector('.done').addEventListener('click',function(){
             const p = ListItem.querySelector('p');
             const date = ListItem.querySelector('small')
@@ -64,45 +64,35 @@ sumbit.addEventListener ('click', function (event) {
             done.disabled = true;
         })
 
+        //edit text
         ListItem.querySelector('.edit').addEventListener('click',function(){
             const textEdit = prompt('Edit text\n');
             const p = ListItem.querySelector('p');
-            p.innerHTML = textEdit;
+            if (textEdit !== null  ) {
+                p.innerHTML = textEdit;
+            }
         })
 
+        //hover icon
+        ListItem.addEventListener('mouseover', function(e) {
+            if(e.target.classList.contains('edit')) {
+                edit.innerHTML = '<i class="bi bi-pencil-fill text-dark"></i>'
+            } else if (e.target.classList.contains('delete')) {
+                const del = ListItem.querySelector('.delete')
+                del.innerHTML = '<i class="bi bi-trash3-fill"></i>';
+            } else if (e.target.classList.contains('done')) {
+                done.innerHTML = '<i class="bi bi-check-square-fill"></i>';
+            }
+        })
 
-        //hover
-        ListItem.querySelector('.edit').addEventListener('mouseover',iconEditOn)      
-        function  iconEditOn () {
-            edit.innerHTML = '<i class="bi bi-pencil-fill text-dark"></i>'
-        }
-
-        ListItem.querySelector('.edit').addEventListener('mouseout',iconEditOff)   
-        function  iconEditOff () {
-            edit.innerHTML = 'Edit';
-        }
-        
-        ListItem.querySelector('.delete').addEventListener('mouseover',icondelOn)  
-        const del = ListItem.querySelector('.delete')
-        function  icondelOn () {
-            del.innerHTML = '<i class="bi bi-trash3-fill"></i>';
-        }
-
-        ListItem.querySelector('.delete').addEventListener('mouseout',icondelOff)      
-        function  icondelOff () {
-            del.innerHTML = 'delete';
-        }
-
-
-        ListItem.querySelector('.done').addEventListener('mouseover',icondoneOn)  
-        function  icondoneOn () {
-            done.innerHTML = '<i class="bi bi-check-square-fill"></i>';
-        }
-
-        ListItem.querySelector('.done').addEventListener('mouseout',icondoneOff)      
-        function  icondoneOff () {
-            done.innerHTML = 'done';
-        }
+        ListItem.addEventListener('mouseout', function(e) {
+            if(e.target.classList.contains('edit')) {
+                edit.innerHTML = 'edit';
+            } else if (e.target.classList.contains('delete')) {
+                const del = ListItem.querySelector('.delete')
+                del.innerHTML = 'delete';
+            } else if (e.target.classList.contains('done')) {
+                done.innerHTML = 'done';
+            }
+        })
     })
-
-
